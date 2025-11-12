@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Notion Analytics — Dashboard</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"/>
+  
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css', v='1.1') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Notion Analytics</h1>
+      <p class="muted">Templates • Downloads • Insights</p>
+    </div>
+  </header>
+
+  <main class="grid">
+    <section class="cards">
+      <div class="card stat" id="cardAll">
+        <div class="card-title">All time</div>
+        <div class="card-value" id="allTime">—</div>
+      </div>
+      <div class="card stat" id="card7">
+        <div class="card-title">Last 7 days</div>
+        <div class="card-value" id="last7">—</div>
+      </div>
+      <div class="card stat" id="card1">
+        <div class="card-title">Last 1 day</div>
+        <div class="card-value" id="last1">—</div>
+      </div>
+      
+      <div class="card stat" id="cardCustom">
+        <div class="card-title">Custom range</div>
+        <div class="card-value" id="customRange">—</div>
+      </div>
+
+    </section>
+
+    <section class="control card">
+      <div class="card-header">
+        <h3>Custom date range</h3>
+      </div>
+      <div class="date-controls">
+        <input type="text" id="dateRange" placeholder="Select date range...">
+        <button id="clearRange" class="clear-button" style="display:none;">&times;</button>
+      </div>
+    </section>
+
+    <section class="charts">
+      <div class="card chart-card">
+        <div class="card-header">
+          <h3>Total downloads — daily</h3>
+          <button class="small" id="exportTotal">Export PNG</button>
+        </div>
+        <canvas id="chartTotal"></canvas>
+      </div>
+
+      <div class="card chart-card">
+        <div class="card-header">
+          <h3>Downloads by template (top)</h3>
+          <select id="topN" class="choices-select">
+            <option value="5">Top 5</option>
+            <option value="10" selected>Top 10</option>
+            <option value="20">Top 20</option>
+            <option value="50">Top 50</option>
+          </select>
+          <button class="small" id="exportTemplates">Export PNG</button>
+        </div>
+        <canvas id="chartTemplates"></canvas>
+      </div>
+
+      <div class="card chart-card no-data">
+        <div class="card-header">
+          <h3>Downloads by template (custom range)</h3>
+          <button class="small" id="exportTemplatesRange">Export PNG</button>
+        </div>
+        <canvas id="chartTemplatesRange"></canvas>
+      </div>
+
+      <div class="card chart-card">
+        <div class="card-header">
+          <h3>Downloads by weekday</h3>
+          <button class="small" id="exportWeekdays">Export PNG</button>
+        </div>
+        <canvas id="chartWeekdays"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
